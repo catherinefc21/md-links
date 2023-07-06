@@ -4,9 +4,22 @@
   "engines": {
     "node": ">=16.x"
   },
+  "type": "module",
+  "scripts": {
+    "build": "babel . -d dist",
+    "start": "babel-node index.js"
+  },
   "bootcamp": {
     "createdAt": "2023-06-20T14:05:58.211Z",
     "version": "6.3.0",
     "commit": "e129ade681adff8cbb19f82e63f688fef2f08f32"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.22.6",
+    "@babel/core": "^7.22.8",
+    "@babel/node": "^7.22.6",
+    "@babel/preset-env": "^7.22.7",
+    "eslint": "^8.44.0",
+    "jest": "^29.6.1"
   }
 }
