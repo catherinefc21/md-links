@@ -1,5 +1,5 @@
-Enlace google [enlace a google](https://www.google.com) a Google.
+[enlace a google](https://www.google.com)
 
-Enlace a [enlace a laboratoria roto](https://www.laaboratoria.la) laboratoria roto.
+[enlace a laboratoria roto](https://www.laaboratoria.la)
 
-Enlace a [enlace](https://www.facebook.com) facebook.
+[enlace a facebook](https://www.facebook.com)

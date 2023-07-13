@@ -1,5 +1,5 @@
-Enlace [enlace a google](https://www.intagram.com) instagram.
+[enlace a instagram](https://www.intagram.com)
 
-Enlace a [enlace a laboratoria roto](https://https://github.com/catherinefc2) mi repo roto.
+[enlace a laboratoria mi repo roto](https://https://github.com/catherinefc2)
 
-Enlace a [enlace](https://www.facebook.coom) facebook roto.
+[enlace a facebook](https://www.facebook.coom)
