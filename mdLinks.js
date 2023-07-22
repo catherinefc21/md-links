@@ -25,6 +25,7 @@ export const mdLinks = (route, options) => {
             arrayFilesMd = fileMd(absolutePath);
           }
           // array de promesas para cada ruta usando map
+          console.log(arrayFilesMd);
           const promises = arrayFilesMd.map((route) => getLinks(route));
           // se ejecutan todas las promesas
           Promise.all(promises).then((results) => {
@@ -45,10 +46,10 @@ export const mdLinks = (route, options) => {
 };
 
 // Pruebas en terminal
-mdLinks("./prueba/file4.txt", { validate: true })
+/*mdLinks("./file2.md", { validate: true })
   .then((result) => {
     console.log(result);
   })
   .catch((error) => {
     console.error(error);
-  });
+  });*/
