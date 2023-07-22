@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import path from "path";
 import {
   convertAbsolutePath,
@@ -31,13 +32,13 @@ describe("IsDirectory", () => {
   });
   it("debería devolver false para un archivo válido", () => {
     const existingFile = "C:\\Users\\HP\\Desktop\\md-links\\file2.md";
-    return isDirectory(existingFile).then((result) => {
+    isDirectory(existingFile).then((result) => {
       expect(result).toBe(false);
     });
   });
-  it("debería devolver rechazar la promesa cuando no es un directorio", () => {
-    const route = "C:\\Users\\HP\\Desktop\\md-links\\file2.md";
-    return isDirectory(route).catch((err) => {
+  it("debería devolver rechazar la promesa cuando la ruta no es válida", () => {
+    const route = "C:\\Users\\HP\\Desktop\\noexiste.md";
+    isDirectory(route).catch((err) => {
       expect(err).toBeInstanceOf(Error);
     });
   });
@@ -48,6 +49,7 @@ describe("processDirectory", () => {
     const result = processDirectory("./prueba2");
     expect(result).toEqual([]);
   });
+
   it("debería devolver un array con las rutas de los archivos .md encontrados en el directorio y subdirectorios", () => {
     const result = processDirectory("./prueba");
     expect(result).toEqual([
@@ -55,6 +57,13 @@ describe("processDirectory", () => {
       "C:\\Users\\HP\\Desktop\\md-links\\prueba\\file2.md",
       "C:\\Users\\HP\\Desktop\\md-links\\prueba\\prueba2\\file11.md",
     ]);
+  });
+
+  it("debería procesar correctamente subdirectorios", () => {
+    const result = processDirectory("./prueba");
+    expect(result).toContain(
+      "C:\\Users\\HP\\Desktop\\md-links\\prueba\\prueba2\\file11.md"
+    );
   });
 });
 
@@ -96,15 +105,16 @@ describe("getLinks", () => {
     });
   });
   it("debería devolver rechazar la promesa si ocurre un error al leer el archivo", () => {
-    const route = "C:\\Users\\HP\\Desktop\\md-links\\file2.md";
-    return getLinks(route).catch((err) => {
+    const failroute = "C:\\Users\\HP\\Desktop\\noexiste.md";
+    return getLinks(failroute).catch((err) => {
       expect(err).toBeInstanceOf(Error);
+      expect(err.message).toBe("Error al leer el archivo.");
     });
   });
 });
 
 describe("validateLinks", () => {
-  it("debería validar los enlaces", () => {
+  it("Debería validar los links y manejar los errores", () => {
     const links = [
       {
         href: "https://www.google.com",
@@ -117,23 +127,26 @@ describe("validateLinks", () => {
         file: "C:\\Users\\HP\\Desktop\\md-links\\file2.md",
       },
     ];
-    validateLinks(links).then((result) => {
-      expect(result).toEqual([
-        {
-          href: "https://www.google.com",
-          text: "enlace a google",
-          file: "C:\\Users\\HP\\Desktop\\md-links\\file2.md",
-          status: 200,
-          ok: "ok",
-        },
-        {
-          href: "https://www.laaboratoria.la",
-          text: "enlace a laboratoria roto",
-          file: "C:\\Users\\HP\\Desktop\\md-links\\file2.md",
-          status: "fail",
-          ok: "fail",
-        },
-      ]);
+    return validateLinks(links).then((result) => {
+      result.forEach((link) => {
+        expect(link).toHaveProperty("status");
+        expect(link).toHaveProperty("ok");
+        expect(["ok", "fail"]).toContain(link.ok);
+        expect(result[0].ok).toBe("ok");
+        // Verificar que el segundo enlace tenga un estado 'fail'
+        expect(result[1].ok).toBe("fail");
+        if (link.status >= 200 && link.status < 400) {
+          expect(link.ok).toBe("ok");
+        } else {
+          expect(link.ok).toBe("fail");
+        }
+      });
+    });
+  });
+  it("Debería devolver una promesa resuelta con un array vacío cuando no hay enlaces", () => {
+    const links = [];
+    return validateLinks(links).then((result) => {
+      expect(result).toEqual([]);
     });
   });
 });

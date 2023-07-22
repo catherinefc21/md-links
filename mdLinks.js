@@ -46,10 +46,11 @@ export const mdLinks = (route, options) => {
 };
 
 // Pruebas en terminal
-/*mdLinks("./file2.md", { validate: true })
+/*mdLinks("prueba", { validate: true })
   .then((result) => {
     console.log(result);
   })
   .catch((error) => {
     console.error(error);
-  });*/
+  });
+*/
