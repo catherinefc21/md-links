@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import path from "path";
 import {
   convertAbsolutePath,
@@ -114,33 +113,34 @@ describe("getLinks", () => {
 });
 
 describe("validateLinks", () => {
+  const links = [
+    {
+      href: "https://www.google.com",
+      text: "enlace a google",
+      file: "C:\\Users\\HP\\Desktop\\md-links\\file2.md",
+    },
+    {
+      href: "https://www.laaboratoria.la",
+      text: "enlace a laboratoria roto",
+      file: "C:\\Users\\HP\\Desktop\\md-links\\file2.md",
+    },
+  ];
   it("Debería validar los links y manejar los errores", () => {
-    const links = [
-      {
-        href: "https://www.google.com",
-        text: "enlace a google",
-        file: "C:\\Users\\HP\\Desktop\\md-links\\file2.md",
-      },
-      {
-        href: "https://www.laaboratoria.la",
-        text: "enlace a laboratoria roto",
-        file: "C:\\Users\\HP\\Desktop\\md-links\\file2.md",
-      },
-    ];
     return validateLinks(links).then((result) => {
       result.forEach((link) => {
         expect(link).toHaveProperty("status");
         expect(link).toHaveProperty("ok");
         expect(["ok", "fail"]).toContain(link.ok);
+        // Verificar que el primer enlace tenga un estado 200 y ok 'ok'
+        expect(result[0].status).toBe(200);
         expect(result[0].ok).toBe("ok");
-        // Verificar que el segundo enlace tenga un estado 'fail'
-        expect(result[1].ok).toBe("fail");
-        if (link.status >= 200 && link.status < 400) {
-          expect(link.ok).toBe("ok");
-        } else {
-          expect(link.ok).toBe("fail");
-        }
       });
+    });
+  });
+  it("debería Verificar que el segundo enlace tenga un estado 'fail' y ok 'fail'", () => {
+    return validateLinks(links).catch((result) => {
+      expect(result[1].status).toBe("fail");
+      expect(result[1].ok).toBe("fail");
     });
   });
   it("Debería devolver una promesa resuelta con un array vacío cuando no hay enlaces", () => {

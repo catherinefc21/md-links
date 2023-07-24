@@ -1,17 +1,32 @@
 {
   "env": {
-    "node": true
+    "node": true,
+    "jest": true
   },
+  "plugins": [
+    "node"
+  ],
   "parserOptions": {
     "ecmaVersion": 8,
     "sourceType": "module"
   },
   "extends": "eslint:recommended",
+  
   "rules": {
     "import/extensions": 0,
     "no-var": "error",
     "prefer-const": "error",
     "eqeqeq": "error",
     "indent": ["error", 2]
-  }
+    
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.spec.js",
+        "**/*.spec.jsx"
+      ]
+    }
+  ]
+  
 }
