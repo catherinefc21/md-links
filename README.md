@@ -79,6 +79,6 @@ Módulo instalable via npm install <github-user>/md-links. Este módulo debe inc
 En este proyecto, se nos sugirió emplear una herramienta de planificación y organización llamada GitHub Projects de GitHub. Esta herramienta nos permite utilizar issues y milestones para organizar y planificar tareas y objetivos específicos de manera efectiva.
 diagrama de flujo...
 
-[Github proyect](https://github.com/users/catherinefc21/projects/2)
+[Github project](https://github.com/users/catherinefc21/projects/2)
 
 
