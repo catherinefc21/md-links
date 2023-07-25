@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import chalk from 'chalk';
 import { functionStats } from './lib/function.js';
 import { mdLinks } from './lib/index.js';

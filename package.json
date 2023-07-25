@@ -1,5 +1,14 @@
-{"name":"md-links",
-"version":"0.1.0",
+{"name":"catherinefc21-md-links",
+"version":"0.1.1",
+"description": "herramienta de línea de comando (CLI) así como tu propia librería (o biblioteca - library) en JavaScript.",
+  "main": "index.js",
+  "bin": {
+    "md-links": "cli.js"
+  },
+"repository": {
+    "type": "git",
+    "url": "git+https://github.com/catherinefc21/md-links"
+  },
 "engines":{"node":">=16.x"},
 "type":"module",
 "scripts":{
