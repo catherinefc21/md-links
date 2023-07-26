@@ -166,7 +166,7 @@ describe('functionStats', () => {
       text: 'enlace inexistente',
       file: 'C:\\Users\\HP\\Desktop\\md-links\\file2.md',
       status: 404,
-      ok: 'fail',
+      ok: '✖ fail',
     },
     {
       href: 'https://www.google.com',
