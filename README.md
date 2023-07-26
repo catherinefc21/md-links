@@ -4,18 +4,17 @@
 
 ## Índice
 
-- [1. Descripción de md-Links](#1-descripción)
+- [1. Descripción general](#1-descripción-general)
 - [2. Instalación](#2-instalación)
-- [3. Ejemplos de uso](#3-objetivos-de-aprendizaje)
-- [4. Sobre el proyecto](#4-consideraciones-generales)
-- [5. Plan de acción](#5-criterios-de-aceptación-mínimos-del-proyecto)
-- [6. Entregables](#6-entregables)
+- [3. Ejemplos de uso](#3-ejemplos-de-uso)
+- [4. Diagramas de Flujo](#4-Diagramas-de-flujo)
+- [5. Planificación del proyecto](#5-Planificación-del-proyecto)
 
 ---
 
 ## 1. Descripción general
 
-md-links es una librería creada con JavaScript y Node.js que analiza archivos Markdown ".md" y extrae los enlaces encontrados en ellos. También puede validar el estado de los enlaces y proporciona estadísticas, como el número total de enlaces, enlaces únicos y enlaces rotos.
+**md-links** es una librería creada con JavaScript y Node.js que analiza archivos Markdown ".md" y extrae los enlaces encontrados en ellos. También puede validar el estado de los enlaces y proporciona estadísticas, como el número total de enlaces, enlaces únicos y enlaces rotos.
 
 Consta de dos partes:
 
@@ -83,19 +82,19 @@ Ejecuta el siguiente comando en tu terminal:
 
 ## 2. Ejemplos de uso
 
-`md-links + Ruta de archivo o directorio`
+`md-links + Ruta de archivo o directorio (path).`
 
 ![imagen1](images/mdlinks1.JPG)
 
-`md-links + Ruta + --validate`
+`md-links + path + --validate`
 
 ![imagen2](images/mdlinks2.JPG)
 
-`md-links + Ruta + --stats`
+`md-links + path + --stats`
 
 ![imagen3](images/mdlinks3.JPG)
 
-`md-links + Ruta + --stats + --validate`
+`md-links + path + --stats + --validate`
 
 ![imagen4](images/mdlinks.JPG)
 
