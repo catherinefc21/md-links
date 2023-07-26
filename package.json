@@ -1,12 +1,42 @@
-{
-  "name": "md-links",
-  "version": "0.1.0",
-  "engines": {
-    "node": ">=16.x"
+{"name":"catherinefc21-md-links",
+"version":"0.1.1",
+"description": "herramienta de línea de comando (CLI) así como tu propia librería (o biblioteca - library) en JavaScript.",
+  "main": "index.js",
+  "bin": {
+    "md-links": "cli.js"
   },
-  "bootcamp": {
-    "createdAt": "2023-06-20T14:05:58.211Z",
-    "version": "6.3.0",
-    "commit": "e129ade681adff8cbb19f82e63f688fef2f08f32"
-  }
+"repository": {
+    "type": "git",
+    "url": "git+https://github.com/catherinefc21/md-links"
+  },
+"engines":{"node":">=16.x"},
+"type":"module",
+"scripts":{
+    "build":"babel . -d dist",
+    "start":"babel-node index.js",
+    "test":"jest --coverage",
+    "pretest":"npm link",
+    "eslint":"eslint --ext .js test/" 
+    },
+"bootcamp":{
+    "createdAt":"2023-06-20T14:05:58.211Z",
+    "version":"6.3.0",
+    "commit":"e129ade681adff8cbb19f82e63f688fef2f08f32"
+},
+"devDependencies":{
+    "@babel/cli":"^7.22.6",
+    "@babel/core":"^7.22.8",
+    "@babel/node":"^7.22.6",
+    "@babel/preset-env":"^7.22.7",
+    "eslint":"^8.44.0","jest":"^29.6.1"
+},
+"dependencies":{
+    "axios":"^1.4.0",
+    "chalk":"^5.3.0",
+    "eslint-config-airbnb":"^19.0.4",
+    "marked":"^5.1.1"
+},
+"prettier": {
+   "singleQuote": true
+}
 }

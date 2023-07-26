@@ -1,84 +1,116 @@
 # Markdown Links
 
+![project](images/portada.png)
+
 ## Índice
 
-* [1. Descripción de md-Links](#1-descripción)
-* [2. Instalación](#2-instalación)
-* [3. Opciones de uso](#3-objetivos-de-aprendizaje)
-* [4. Sobre el proyecto](#4-consideraciones-generales)
-* [5. Plan de acción](#5-criterios-de-aceptación-mínimos-del-proyecto)
-* [6. Entregables](#6-entregables)
-***
+- [1. Descripción de md-Links](#1-descripción)
+- [2. Instalación](#2-instalación)
+- [3. Ejemplos de uso](#3-objetivos-de-aprendizaje)
+- [4. Sobre el proyecto](#4-consideraciones-generales)
+- [5. Plan de acción](#5-criterios-de-aceptación-mínimos-del-proyecto)
+- [6. Entregables](#6-entregables)
 
-## 1. Descripción de md-Links
-![project](images/portada.png)
-md-links es una biblioteca creada con JavaScript y Node.js que analiza archivos Markdown ".md" y extrae los enlaces encontrados en ellos. También puede validar el estado de los enlaces y proporciona estadísticas, como el número total de enlaces, enlaces únicos y enlaces rotos.
+---
 
+## 1. Descripción general
+
+md-links es una librería creada con JavaScript y Node.js que analiza archivos Markdown ".md" y extrae los enlaces encontrados en ellos. También puede validar el estado de los enlaces y proporciona estadísticas, como el número total de enlaces, enlaces únicos y enlaces rotos.
+
+Consta de dos partes:
+
+### 1) javaScript API
+
+El módulo puede **importarse** en otros scripts de Node.js y ofrece la siguiente interfaz:
+
+#### `mdLinks(path, options)`
+
+##### Argumentos
+
+- `path`: Ruta **absoluta** o **relativa** al **archivo** o **directorio**.
+  Si la ruta pasada es relativa, debe resolverse como relativa al directorio
+  desde donde se invoca node - _current working directory_).
+- `options`: Un objeto con **únicamente** la siguiente propiedad:
+  - `validate`: Booleano que determina si se desea validar los links
+    encontrados.
+
+##### Valor de retorno
+
+La función **retorna una promesa** (`Promise`) que **resuelva a un arreglo** (`Array`) de objetos (`Object`), donde cada objeto representa un link y contiene
+las siguientes propiedades
+
+Con `validate:false` :
+
+- `href`: URL encontrada.
+- `text`: Texto que aparecía dentro del link (`<a>`).
+- `file`: Ruta del archivo donde se encontró el link.
+
+Con `validate:true` :
+
+- `href`: URL encontrada.
+- `text`: Texto que aparecía dentro del link (`<a>`).
+- `file`: Ruta del archivo donde se encontró el link.
+- `status`: Código de respuesta HTTP.
+- `ok`: Mensaje `fail` en caso de fallo u `ok` en caso de éxito.
+
+### 2) CLI (Command Line Interface - Interfaz de Línea de Comando)
+
+Se debe ejecutar de la siguiente manera a través de la **terminal**:
+
+`md-links <path-to-file> [options]`
+
+#### Options
+
+##### `--validate`
+
+Si pasamos la opción `--validate`, el módulo debe hacer una petición HTTP para averiguar si el link funciona o no. Si el link resulta en una redirección a una
+URL que responde ok, entonces consideraremos el link como ok.
+
+##### `--stats`
+
+Si pasamos la opción `--stats` el output (salida) será un texto con estadísticas básicas sobre los links.
+
+##### `--stats` y `--validate`
+
+Además, se pueden combinar estas opciones para obtener estadísticas que
+necesiten de los resultados de la validación.
 
 ## 2. Instalación
 
-Puedes instalar md-links utilizando npm. Ejecuta el siguiente comando en tu terminal:
-npm i catherinefc21-md-links
+Ejecuta el siguiente comando en tu terminal:
 
-## 3. Opciones de uso
+`$ npm install -g catherinefc21-md-links`
 
-Se ejecuta de la siguiente manera a través de la terminal:
+## 2. Ejemplos de uso
 
-md-links <path-to-file> [options]
+`md-links + Ruta de archivo o directorio`
 
-Por ejemplo:
+![imagen1](images/mdlinks1.JPG)
 
-$ md-links ./some/example.md
-./some/example.md http://algo.com/2/3/ Link a algo
-./some/example.md https://otra-cosa.net/algun-doc.html algún doc
-./some/example.md http://google.com/ Google
-El comportamiento por defecto consiste en analizar un archivo Markdown recibido como argumento, sin validar si las URLs incluidas en el archivo responden correctamente. El objetivo principal es identificar el archivo Markdown, examinar su contenido y mostrar los enlaces encontrados. Para cada enlace, se imprimirá la ruta del archivo donde aparece y el texto dentro del enlace, limitado a 50 caracteres.
+`md-links + Ruta + --validate`
 
-Options
---validate
-mdlinks-perez <path-to-file> --validate
+![imagen2](images/mdlinks2.JPG)
 
-Si pasamos la opción --validate, el módulo debe hacer una petición HTTP para averiguar si el link funciona o no.
+`md-links + Ruta + --stats`
 
-Por ejemplo:
+![imagen3](images/mdlinks3.JPG)
 
-$ md-links ./some/example.md --validate
-./some/example.md http://algo.com/2/3/ ok 200 Link a algo
-./some/example.md https://otra-cosa.net/algun-doc.html fail 404 algún doc
-./some/example.md http://google.com/ ok 301 Google
-Vemos que el output en este caso incluye la palabra ok o fail después de la URL, así como el status de la respuesta recibida a la petición HTTP a dicha URL.
+`md-links + Ruta + --stats + --validate`
 
---stats
-mdlinks-perez <path-to-file> --stats
+![imagen4](images/mdlinks.JPG)
 
-Si pasamos la opción --stats el output (salida) será un texto con estadísticas básicas sobre los links.
+## 4. Diagramas de flujo con la lógica de la aplicación
 
-$ md-links ./some/example.md --stats
-Total: 3
-Unique: 3
-También podemos combinar --stats y --validate para obtener estadísticas que necesiten de los resultados de la validación.
+### 1) javaScript API ✔
 
-mdlinks-perez <path-to-file> --stats --validate
+![imagen5](images/diagrama1.jpg)
 
-$ md-links ./some/example.md --stats --validate
-Total: 3
-Unique: 3
-Broken: 1
+### 2) Interfaz CLI ✔
 
-## 4. Sobre el proyecto
-Markdown es un lenguaje de marcado ligero muy popular entre developers. Es usado en muchísimas plataformas que manejan texto plano (GitHub, foros, blogs, ...) y es muy común encontrar varios archivos en ese formato en cualquier tipo de repositorio (empezando por el tradicional README.md).
+![imagen6](images/diagrama2.jpg)
 
-Estos archivos Markdown normalmente contienen links (vínculos/ligas) que muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de la información que se quiere compartir.
+## 5. Planificación del proyecto
 
-Dentro de una comunidad de código abierto, nos han propuesto crear una herramienta usando Node.js, que lea y analice archivos en formato Markdown, para verificar los links que contengan y reportar algunas estadísticas.
+Uso de [github project](https://github.com/users/catherinefc21/projects/2) para organización de tareas, progreso e hitos.
 
-Módulo instalable via npm install <github-user>/md-links. Este módulo debe incluir tanto un ejecutable como una interfaz que podamos importar con require para usarlo programáticamente.
-
-
-## 5. Plan de ación
-En este proyecto, se nos sugirió emplear una herramienta de planificación y organización llamada GitHub Projects de GitHub. Esta herramienta nos permite utilizar issues y milestones para organizar y planificar tareas y objetivos específicos de manera efectiva.
-diagrama de flujo...
-
-[Github project](https://github.com/users/catherinefc21/projects/2)
-
-
+![imagen7](images/project1.JPG)
