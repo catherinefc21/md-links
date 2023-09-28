@@ -15,7 +15,7 @@
 ## 1. Descripción general
 
 **md-links** es una librería creada con JavaScript y Node.js que analiza archivos Markdown ".md" y extrae los enlaces encontrados en ellos. También puede validar el estado de los enlaces y proporciona estadísticas, como el número total de enlaces, enlaces únicos y enlaces rotos.
-[Link](https://www.npmjs.com/package/catherinefc21-md-links)
+[https://www.npmjs.com/package/catherinefc21-md-links](https://www.npmjs.com/package/catherinefc21-md-links)
 
 Consta de dos partes:
 
